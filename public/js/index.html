@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en tiempo real</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="chat"></div>
+
+    <form id="message-form">
+        <input type="text" id="message-input" placeholder="Escribe un mensaje">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onopen = function() {
+            console.log('Conexión establecida');
+        };
+
+        ws.onmessage = function(event) {
+            const message = JSON.parse(event.data);
+            const chatDiv = document.getElementById('chat');
+            const messageP = document.createElement('p');
+            messageP.textContent = message.text;
+            chatDiv.appendChild(messageP);
+        };
+
+        document.getElementById('message-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value;
+            ws.send(JSON.stringify({ text: message }));
+            messageInput.value = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Audio</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Color de fondo */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .botones-audio {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Añadir este estilo para que los botones se ajusten al tamaño del contenedor */
+        }
+
+        .botones-audio img {
+            width: 100px; /* Ancho de las imágenes */
+            height: auto;
+            margin: 10px; /* Espacio entre las imágenes */
+            cursor: pointer; /* Cambiar el cursor al pasar sobre las imágenes */
+            transition: transform 0.3s ease; /* Efecto de transición al pasar sobre las imágenes */
+        }
+
+        .botones-audio img:hover {
+            transform: scale(1.1); /* Aumentar tamaño al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Audio</h1>
+        
+        <div class="botones-audio">
+            <img src="../img/subirvolumen.png" alt="Subir Volumen" onclick="sendCommand('subirVolumen')">
+            <img src="../img/bajarvolumen.png" alt="Bajar Volumen" onclick="sendCommand('bajarVolumen')">
+            <img src="../img/silencio.png" alt="Mutear" onclick="sendCommand('mutear')">
+	    <img src="../img/atras.png" alt="Pista Anterior" onclick="sendCommand('anteriorPista')">
+            <img src="../img/pausa.png" alt="Parar/Reproducir" onclick="sendCommand('pararReproducir')">
+            <img src="../img/siguiente.png" alt="Siguiente Pista" onclick="sendCommand('siguientePista')">
+        </div>
+    </div>
+
+    <script>
+        async function sendCommand(command) {
+            try {
+                const response = await fetch(`/control/${command}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    console.log(`Comando "${command}" ejecutado con éxito.`);
+                } else {
+                    console.error(`Error al ejecutar el comando "${command}".`);
+                }
+            } catch (error) {
+                console.error(`Error de red: ${error}`);
+            }
+        }
+    </script>
+</body>
+</html>
+

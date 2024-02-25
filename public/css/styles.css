@@ -1,0 +1,55 @@
+body {
+    font-family: Consolas, Monaco, 'Courier New', monospace;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    border: 2px solid white; /* Añade un borde blanco */
+}
+
+h1 {
+    color: lime; /* Cambia el color del título */
+}
+
+#resultado {
+    background-color: black;
+    padding: 10px;
+    border-radius: 3px;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    max-height: 300px;
+    border: 1px solid white; /* Añade un borde blanco */
+}
+
+input[type="text"] {
+    padding: 10px;
+    background-color: black;
+    border: none;
+    color: white;
+    border-bottom: 2px solid white; /* Añade un borde inferior blanco */
+    font-family: Consolas, Monaco, 'Courier New', monospace;
+    font-size: 14px;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+}
+
+button[type="submit"] {
+    display: none; /* Oculta el botón de envío */
+}
